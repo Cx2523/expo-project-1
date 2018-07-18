@@ -24,15 +24,32 @@ class Login extends React.Component {
         fetch('https://fitness-tracker-1.herokuapp.com/login', {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(this.state),
         })
-        .then(response => { 
+        .then(response => response.json())
+        .then(responseJson => { 
             Alert.alert('test')
-            console.log(response);
+            console.log(responseJson);
+            return responseJson;
+        })
+        .catch(error => {
+            console.log(error);
         });
+
+        // e.preventDefault();
+        // Alert.alert('Submit');
+        // fetch('https://fitness-tracker-1.herokuapp.com/exercise')
+        //     .then((response) => response.json())
+        //     .then((responseJson) => {
+        //         console.log(responseJson);
+        //         return responseJson;
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
     }
 
     render() {
