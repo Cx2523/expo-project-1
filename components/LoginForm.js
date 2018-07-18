@@ -1,6 +1,5 @@
 import * as React from 'react';
-// import * as request from 'superagent';
-import { TextInput, Button, View, AppRegistry } from 'react-native';
+import { TextInput, Button, View, AppRegistry, Alert } from 'react-native';
 import { styles } from '../styles/stylesheet';
 import * as request from 'superagent';
 
@@ -20,16 +19,20 @@ class Login extends React.Component {
     };
 
     handleSubmit = (e) => {
-        // e.preventDefault();
-        // request.post('/login')
-        //     .set('Content-Type', 'application/json')
-        //     .send(this.state)
-        //     .then(res => {
-        //         this.props.history.push({ 
-        //             pathname: "/dashboard",
-        //             state: { userdata: JSON.stringify(res.body) }
-        //         });
-        //     });
+        e.preventDefault();
+        Alert.alert('Submit');
+        fetch('https://fitness-tracker-1.herokuapp.com/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.state),
+        })
+        .then(response => { 
+            Alert.alert('test')
+            console.log(response);
+        });
     }
 
     render() {
