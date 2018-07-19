@@ -1,4 +1,4 @@
-import React from 'react';
+import React from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
 import {
   Image,
   Platform,
@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import { WebBrowser } from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/expo';
 
 import { MonoText } from '../components/StyledText';
 import Login from '../components/LoginForm';
@@ -35,7 +35,8 @@ export default class HomeScreen extends React.Component {
             />
           </View>
 
-          <Login /> 
+          <Login />
+          
 
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
@@ -93,7 +94,9 @@ export default class HomeScreen extends React.Component {
   }
 
   _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
+
+    const { navigate } = this.props.navigation;
+    navigate('UserHome');
   };
 
   _handleHelpPress = () => {

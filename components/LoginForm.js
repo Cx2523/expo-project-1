@@ -1,7 +1,6 @@
-import * as React from 'react';
+import * as React from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
 import { TextInput, Button, View, AppRegistry, Alert } from 'react-native';
 import { styles } from '../styles/stylesheet';
-import * as request from 'superagent';
 
 class Login extends React.Component {
     constructor(props) {
@@ -38,18 +37,6 @@ class Login extends React.Component {
         .catch(error => {
             console.log(error);
         });
-
-        // e.preventDefault();
-        // Alert.alert('Submit');
-        // fetch('https://fitness-tracker-1.herokuapp.com/exercise')
-        //     .then((response) => response.json())
-        //     .then((responseJson) => {
-        //         console.log(responseJson);
-        //         return responseJson;
-        //     })
-        //     .catch((error) => {
-        //         console.error(error);
-        //     });
     }
 
     render() {

@@ -1,14 +1,19 @@
-import React from 'react';
+import React from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import UserHomeScreen from '../screens/UserHomeScreen';
+import WorkoutScreen from '../screens/WorkoutScreen'; 
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  UserHome: UserHomeScreen,
+  Workout: WorkoutScreen
 });
 
 HomeStack.navigationOptions = {
