@@ -1,6 +1,7 @@
-import * as React from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
+import * as React from 'react';
 import { TextInput, Button, View, AppRegistry, Alert } from 'react-native';
 import { styles } from '../styles/stylesheet';
+import { UserHomeScreen } from '../screens/UserHomeScreen';
 
 class Login extends React.Component {
     constructor(props) {
@@ -30,9 +31,9 @@ class Login extends React.Component {
         })
         .then(response => response.json())
         .then(responseJson => { 
-            Alert.alert('test')
-            console.log(responseJson);
-            return responseJson;
+            
+            this.props.navigate('UserHome', {userData: responseJson});
+            // return responseJson;
         })
         .catch(error => {
             console.log(error);

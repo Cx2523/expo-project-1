@@ -1,5 +1,5 @@
-import React from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
-import { Icon } from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/expo';
+import React from 'react';
+import { Icon } from 'expo';
 
 import Colors from '../constants/Colors';
 

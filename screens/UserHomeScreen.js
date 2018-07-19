@@ -11,19 +11,17 @@ export default class UserHomeScreen extends Component {
 
     startWorkout = () => {
         const { navigate } = this.props.navigation;
-        navigate('Workout');
+        navigate('Workout', { userData: this.props.navigation.state.params.userData} );
     }
-
+ 
     render() {
+        
         return (
             <Container>
                 <Header />
                 <Content>
-                    <Content padder>
-                        <Accordion dataArray={dataArray} expanded={0} />
-                    </Content>
                     <Button block success onPress={this.startWorkout}>
-                        <Text>Success</Text>
+                        <Text>START WORKOUT!</Text>
                     </Button>
                 </Content>
             </Container>
