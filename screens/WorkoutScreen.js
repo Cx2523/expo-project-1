@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Button, Text, Accordion, Card, CardItem } from 'native-base';
+import { 
+    Container, 
+    Header, 
+    Content, 
+    Text, 
+    Card, 
+    CardItem,
+    Icon,
+    Button
+ } from 'native-base';
 
 const dataArray = [
     { title: "First Element", content: "Lorem ipsum dolor sit amet" },
@@ -10,10 +19,9 @@ const dataArray = [
 export default class WorkoutScreen extends Component {
     
     render() {
-        console.log(this.props.navigation.state);
         return (
             <Container>
-                <Header />
+                <Header />    
                 <Content>
                     {this.props.navigation.state.params.userData.Exercises
                         .map(exercise => 
@@ -24,8 +32,14 @@ export default class WorkoutScreen extends Component {
                             </Card>
                         )
                     }
+                    <Button block bordered success>
+                        <Icon type="FontAwesome" name="plus" />
+                        <Text>
+                            Add New
+                        </Text>
+                    </Button>
                 </Content>
             </Container>
-        );
-    }
+        ); 
+    }  
 }
