@@ -18,10 +18,17 @@ const mapStateToProps = (state) => {
 };
 
 class WorkoutScreen extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    goToExerciseEdit = () => {
+        this.props.navigation.navigate('MyExercises');
+    }
+
     render() {
         return (
             <Container>
-                <Header />    
                 <Content>
                     {this.props.exercises
                         .map(exercise => 
@@ -32,7 +39,7 @@ class WorkoutScreen extends Component {
                             </Card>
                         )
                     }
-                    <Button block bordered success>
+                    <Button block bordered success onPress={this.goToExerciseEdit}>
                         <Icon type="FontAwesome" name="plus" />
                         <Text>
                             Add New

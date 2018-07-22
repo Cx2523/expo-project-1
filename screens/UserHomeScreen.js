@@ -12,7 +12,6 @@ export default class UserHomeScreen extends Component {
         
         return (
             <Container>
-                <Header />
                 <Content>
                     <Button block success onPress={this.startWorkout}>
                         <Text>START WORKOUT!</Text>
