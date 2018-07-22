@@ -14,8 +14,15 @@ import { MonoText } from '../components/StyledText';
 import Login from '../components/LoginForm';
 
 import { styles } from '../styles/stylesheet';
+import { connect } from 'react-redux';
 
-export default class HomeScreen extends React.Component {
+const mapStateToProps = (state) => {
+  return {
+    test: state.test
+  };
+}
+
+class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -36,7 +43,7 @@ export default class HomeScreen extends React.Component {
           </View>
 
           <Login navigate={this.props.navigation.navigate}/>
-          
+          <Text>{this.props.test}</Text>
 
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
@@ -103,3 +110,6 @@ export default class HomeScreen extends React.Component {
     );
   };
 }
+
+
+export default connect(mapStateToProps)(HomeScreen);

@@ -1,0 +1,2 @@
+export const ADD_EXERCISE = 'ADD_EXERCISE';
+export const INITIALIZE_STATE = 'INITIALIZE_STATE';

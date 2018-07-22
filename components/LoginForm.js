@@ -2,6 +2,8 @@ import * as React from 'react';
 import { TextInput, Button, View, AppRegistry, Alert } from 'react-native';
 import { styles } from '../styles/stylesheet';
 import { UserHomeScreen } from '../screens/UserHomeScreen';
+import { connect } from 'react-redux';
+import { initializeState } from '../Redux/Actions/actionsIndex';
 
 class Login extends React.Component {
     constructor(props) {
@@ -31,9 +33,10 @@ class Login extends React.Component {
         })
         .then(response => response.json())
         .then(responseJson => { 
+            console.log(responseJson);
+            this.props.initializeState(responseJson);
+            this.props.navigate('UserHome');
             
-            this.props.navigate('UserHome', {userData: responseJson});
-            // return responseJson;
         })
         .catch(error => {
             console.log(error);
@@ -71,4 +74,10 @@ AppRegistry.registerComponent(
     () => Login
 );
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        initializeState: data => dispatch(initializeState(data))
+    };
+}
+
+export default connect(null, mapDispatchToProps)(Login);

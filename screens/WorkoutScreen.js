@@ -7,23 +7,23 @@ import {
     Card, 
     CardItem,
     Icon,
-    Button
+    Button 
  } from 'native-base';
+import { connect } from 'react-redux';
 
-const dataArray = [
-    { title: "First Element", content: "Lorem ipsum dolor sit amet" },
-    { title: "Second Element", content: "Lorem ipsum dolor sit amet" },
-    { title: "Third Element", content: "Lorem ipsum dolor sit amet" }
-];
+const mapStateToProps = (state) => {
+    return {
+        exercises: state.Exercises
+    }
+};
 
-export default class WorkoutScreen extends Component {
-    
+class WorkoutScreen extends Component {
     render() {
         return (
             <Container>
                 <Header />    
                 <Content>
-                    {this.props.navigation.state.params.userData.Exercises
+                    {this.props.exercises
                         .map(exercise => 
                             <Card key={exercise.id}>
                                 <CardItem>
@@ -43,3 +43,5 @@ export default class WorkoutScreen extends Component {
         ); 
     }  
 }
+
+export default connect(mapStateToProps)(WorkoutScreen);
