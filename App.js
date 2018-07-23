@@ -5,6 +5,7 @@ import AppNavigator from './navigation/AppNavigator';
 
 import { Provider } from 'react-redux';
 import store from './Redux/Store/storeIndex';
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,

@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { TextInput, Textarea, Container, Button, Content, Form, Item, Input, Picker, CheckBox, Body, ListItem, Text, Icon, H3 } from 'native-base';
+import { Textarea, Container, Button, Content, Form, Item, Input, Picker,  Text, H3 } from 'native-base';
+import { connect } from 'react-redux';
+import { addExercise } from '../Redux/Actions/actionsIndex';
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addExercise: (exercise) => dispatch(addExercise(exercise))
+    }
+}
 
 class ExerciseEdit extends Component {
     constructor(props) {
@@ -29,7 +37,8 @@ class ExerciseEdit extends Component {
     }
 
     handleSubmit = () => {
-        console.log(this.state);
+        this.props.addExercise(this.state); 
+        this.props.navigate('Workout');
     }
 
     render() {
@@ -44,7 +53,7 @@ class ExerciseEdit extends Component {
                                     marginTop: '2%',
                                     marginBottom: '2%' 
                                 }}
-                                onChangeText={(text) => this.setState({ Name: text })}
+                                onChangeText={(text) => this.setState({ Name: text })} 
                                 value={this.state.Name}
                             />  
                         </Item> 
@@ -90,4 +99,4 @@ class ExerciseEdit extends Component {
     }
 } 
 
-export default ExerciseEdit; 
+export default connect(null, mapDispatchToProps)(ExerciseEdit); 

@@ -7,7 +7,7 @@ class MyExercisesScreen extends Component {
         
         return (
             <Container>
-                <ExerciseEdit />
+                <ExerciseEdit navigate={this.props.navigation.navigate}/>
             </Container>
         );
     }

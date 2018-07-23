@@ -1,4 +1,4 @@
-import { ADD_EXERICSE, INITIALIZE_STATE } from '../constants';
+import { ADD_EXERCISE, INITIALIZE_STATE } from '../constants';
 
 const initialState = {};
 
@@ -7,8 +7,8 @@ const rootReducer = (state = initialState, action) => {
         case INITIALIZE_STATE:
             return Object.assign({}, action.payload);
     
-        case ADD_EXERICSE:
-            return { ...state, exercises: [...state.exercises, action.payload ]}
+        case ADD_EXERCISE:
+            return { ...state, Exercises: [...state.Exercises, action.payload ]}
     
         default: 
             return state;

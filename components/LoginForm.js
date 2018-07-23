@@ -56,8 +56,7 @@ class Login extends React.Component {
                     onChangeText={(text) => this.setState({password: text})}
                     value={this.state.password}
                 />
-               
-                {/* <Button variant='contained' color='primary' type='submit'>Submit</Button> */}
+
                 <Button
                     onPress={this.handleSubmit}
                     title="LOGIN"
