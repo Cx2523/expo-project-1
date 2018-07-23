@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Textarea, Container, Button, Content, Form, Item, Input, Picker,  Text, H3 } from 'native-base';
 import { connect } from 'react-redux';
-import { addExercise } from '../Redux/Actions/actionsIndex';
+import { addExerciseToDb } from '../Redux/Actions/actionsIndex';
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addExercise: (exercise) => dispatch(addExercise(exercise))
+        addExerciseToDb: (exercise) => dispatch(addExerciseToDb(exercise))
     }
 }
 
@@ -37,8 +37,8 @@ class ExerciseEdit extends Component {
     }
 
     handleSubmit = () => {
-        this.props.addExercise(this.state); 
-        this.props.navigate('Workout');
+        this.props.addExerciseToDb(this.state); 
+        // this.props.navigate('Workout');
     }
 
     render() {
