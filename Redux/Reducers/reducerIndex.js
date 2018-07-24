@@ -26,7 +26,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state, 
                 Exercises: [
-                    ...state.Exercises.slice(0, deleteIndex), 
+                    ...state.Exercises.slice(0, deleteIndex),  
                     ...state.Exercises.slice(deleteIndex + 1)
                 ]
             }

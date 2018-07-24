@@ -59,11 +59,13 @@ class ExerciseEdit extends Component {
     }
 
     handleSubmit = () => {
-        if (this.state.id) {
-            // update exercise in db
+        if (this.state.id) { 
+            this.props.updateExerciseInDb(this.state);
         } else {
             this.props.addExerciseToDb(this.state); 
         }
+        this.props.navigate('Workout');
+
     }
 
     render() {

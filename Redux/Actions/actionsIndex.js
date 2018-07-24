@@ -56,10 +56,11 @@ export const updateExerciseInDb = (exercise) => {
             })
             .then(response => response.json())
             .then(responseJson => { 
-                dispatch(updateExerciseInLocalData(responseJson));
+                console.log('update response', responseJson[1][0])
+                dispatch(updateExerciseInLocalData(responseJson[1][0]));
             })
             .catch(error => {
-                console.log(error);
+                console.log(error); 
             });
         }
 }
