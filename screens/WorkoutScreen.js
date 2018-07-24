@@ -41,8 +41,8 @@ class WorkoutScreen extends Component {
         });
     }
 
-    goToExerciseEdit = () => {
-        this.props.navigation.navigate('MyExercises');
+    goToExerciseEdit = (id = null) => {
+        this.props.navigation.navigate('MyExercises', {id: id});
     }
 
     deleteExercise = (exerciseId) => {
@@ -61,7 +61,7 @@ class WorkoutScreen extends Component {
                 />
                 <Content>
                     {this.state.editMode ?
-                        <Button block bordered success onPress={this.goToExerciseEdit}>
+                        <Button block bordered success onPress={() => this.goToExerciseEdit()}>
                             <Icon type="FontAwesome" name="plus" />
                             <Text>
                                 Add New
@@ -78,12 +78,18 @@ class WorkoutScreen extends Component {
                                     <Text style={{fontSize: 28}}>{exercise.Name}</Text>
                                     {this.state.editMode ?
                                         <View style={{width: '40%', justifyContent: 'space-around', flexDirection: 'row'}}>
-                                            <Icon type="FontAwesome" name="pencil" style={{
-                                                fontSize: 30,
-                                                color:"#ffe600"
-                                            }} />
                                             <Icon 
-                                                type="FontAwesome" name="remove"
+                                                type="FontAwesome" 
+                                                name="pencil" 
+                                                style={{
+                                                    fontSize: 30,
+                                                    color:"#ffe600"
+                                                }}
+                                                onPress={() => this.goToExerciseEdit(exercise.id)}
+                                            />
+                                            <Icon 
+                                                type="FontAwesome" 
+                                                name="remove"
                                                 style={{
                                                     color: '#ff001a',
                                                     fontSize: 30

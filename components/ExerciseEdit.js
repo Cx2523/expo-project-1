@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { Textarea, Container, Button, Content, Form, Item, Input, Picker,  Text, H3 } from 'native-base';
 import { connect } from 'react-redux';
-import { addExerciseToDb } from '../Redux/Actions/actionsIndex';
+import { addExerciseToDb, updateExerciseInDb } from '../Redux/Actions/actionsIndex';
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addExerciseToDb: (exercise) => dispatch(addExerciseToDb(exercise))
+        addExerciseToDb: (exercise) => dispatch(addExerciseToDb(exercise)),
+        updateExerciseInDb: (exercise) => dispatch(updateExerciseInDb(exercise))
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        exercises: state.Exercises
     }
 }
 
@@ -13,12 +20,29 @@ class ExerciseEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: null,
             name: '',
             description: '',
             category: '',
             weight: false,
             time: false,
             reps: false
+        }
+    }
+
+    componentWillMount() {
+        if (this.props.id) {
+            const exerciseToEdit = this.props.exercises.find(exercise => exercise.id === this.props.id);
+
+            this.setState(Object.assign({}, {
+                id: exerciseToEdit.id,
+                name: exerciseToEdit.Name,
+                description: exerciseToEdit.Description,
+                category: exerciseToEdit.Category,
+                weight: exerciseToEdit.Weight,
+                time: exerciseToEdit.Time, 
+                reps: exerciseToEdit.Reps 
+            }));
         }
     }
 
@@ -35,9 +59,11 @@ class ExerciseEdit extends Component {
     }
 
     handleSubmit = () => {
-        console.log('handle Submiyt')
-        this.props.addExerciseToDb(this.state); 
-        // this.props.navigate('Workout');
+        if (this.state.id) {
+            // update exercise in db
+        } else {
+            this.props.addExerciseToDb(this.state); 
+        }
     }
 
     render() {
@@ -98,4 +124,4 @@ class ExerciseEdit extends Component {
     }
 } 
 
-export default connect(null, mapDispatchToProps)(ExerciseEdit); 
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseEdit); 
