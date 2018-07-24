@@ -13,30 +13,29 @@ class ExerciseEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Name: '',
-            Description: '',
-            Category: '',
-            Metrics: {
-                Weight: false,
-                Time: false,
-                Reps: false
-            }
+            name: '',
+            description: '',
+            category: '',
+            weight: false,
+            time: false,
+            reps: false
         }
     }
 
     metricCheckBoxUpdate = (metric) => {
-        this.setState(prevState => {
-            let newMetrics = Object.assign({}, prevState.Metrics);
-            newMetrics[metric] = !prevState.Metrics[metric]
-            return { Metrics: newMetrics }
-        });
+        this.setState(prevState => {  
+            return {
+                [metric] : !prevState[metric]
+            }
+        }); 
     }
 
     categorySelectorChange = (value) => {
-        this.setState({ Category: value });
+        this.setState({ category: value });
     }
 
     handleSubmit = () => {
+        console.log('handle Submiyt')
         this.props.addExerciseToDb(this.state); 
         // this.props.navigate('Workout');
     }
@@ -48,16 +47,16 @@ class ExerciseEdit extends Component {
                     <Form>
                         <Item floatingLabel>
                             <Input
-                                placeholder="Name"
+                                placeholder="name"
                                 style={{
                                     marginTop: '2%',
                                     marginBottom: '2%' 
                                 }}
-                                onChangeText={(text) => this.setState({ Name: text })} 
-                                value={this.state.Name}
+                                onChangeText={(text) => this.setState({ name: text })} 
+                                value={this.state.name}
                             />  
                         </Item> 
-                        <Textarea rowSpan={3} bordered placeholder="Description" />
+                        <Textarea rowSpan={3} bordered placeholder="description" />
                         <H3>Category</H3>
                         <Item picker style={{ marginTop: '2%', marginBottom: '2%' }}>
                             <Picker
@@ -65,7 +64,7 @@ class ExerciseEdit extends Component {
                                 placeholder="Category"
                                 placeholderStyle={{ color: "#bfc6ea" }}
                                 placeholderIconColor="#007aff"
-                                selectedValue={this.state.Category}
+                                selectedValue={this.state.category}
                                 onValueChange={this.categorySelectorChange}
                             >
                                 <Picker.Item label="Strength / Anaerobic" value="Anaerobic" />
@@ -75,13 +74,13 @@ class ExerciseEdit extends Component {
                             </Picker>
                         </Item>
                         <H3>Metrics</H3>
-                        <Button block bordered={!this.state.Metrics.Reps} onPress={() => this.metricCheckBoxUpdate('Reps')} style={{ marginTop: '2%', marginBottom: '2%' }}>
+                        <Button block bordered={!this.state.reps} onPress={() => this.metricCheckBoxUpdate('reps')} style={{ marginTop: '2%', marginBottom: '2%' }}>
                             <Text>Reps</Text>
                         </Button>
-                        <Button block bordered={!this.state.Metrics.Time} onPress={() => this.metricCheckBoxUpdate('Time')} style={{ marginTop: '2%', marginBottom: '2%' }}>
+                        <Button block bordered={!this.state.time} onPress={() => this.metricCheckBoxUpdate('time')} style={{ marginTop: '2%', marginBottom: '2%' }}>
                             <Text>Time</Text>
                         </Button>
-                        <Button block bordered={!this.state.Metrics.Weight} onPress={() => this.metricCheckBoxUpdate('Weight')} style={{ marginTop: '2%', marginBottom: '2%' }}>
+                        <Button block bordered={!this.state.weight} onPress={() => this.metricCheckBoxUpdate('weight')} style={{ marginTop: '2%', marginBottom: '2%' }}>
                             <Text>Weight</Text>
                         </Button>
                     </Form>
