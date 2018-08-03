@@ -8,7 +8,8 @@ import {
     CardItem,
     Icon,
     Button,
-    View
+    View,
+    Alert
 } from 'native-base';
 import { connect } from 'react-redux';
 import { deleteExerciseFromDb } from '../Redux/Actions/actionsIndex';
@@ -49,8 +50,12 @@ class WorkoutScreen extends Component {
         this.props.deleteExerciseFromDb(exerciseId);
     }
 
+    goToSets = (id) => {
+        this.props.navigation.navigate('MySets', {id: id});
+    }
+
     render() {
-        return ( 
+        return (   
             <Container>
                 <Icon type="FontAwesome" name="gear" 
                     style={{
@@ -73,8 +78,8 @@ class WorkoutScreen extends Component {
 
                     {this.props.exercises
                         .map(exercise =>
-                            <Card key={exercise.id}>
-                                <CardItem style={{justifyContent: 'space-between'}}>
+                            <Card  key={exercise.id}>
+                                <CardItem button onPress={() => this.goToSets(exercise.id)} style={{justifyContent: 'space-between'}}>
                                     <Text style={{fontSize: 28}}>{exercise.Name}</Text>
                                     {this.state.editMode ?
                                         <View style={{width: '40%', justifyContent: 'space-around', flexDirection: 'row'}}>

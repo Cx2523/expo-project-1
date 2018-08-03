@@ -9,13 +9,14 @@ import SettingsScreen from '../screens/SettingsScreen';
 import UserHomeScreen from '../screens/UserHomeScreen';
 import WorkoutScreen from '../screens/WorkoutScreen'; 
 import MyExercisesScreen from '../screens/MyExercisesScreen';
-
+import Sets from '../screens/Sets';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
   UserHome: UserHomeScreen,
   Workout: WorkoutScreen,
-  MyExercises: MyExercisesScreen
+  MyExercises: MyExercisesScreen,
+  MySets: Sets
 });
 
 HomeStack.navigationOptions = {
