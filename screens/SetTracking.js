@@ -15,6 +15,7 @@ import {
 } from 'native-base';
 import { connect } from 'react-redux';
 import Incrementor from '../components/Incrementor';
+import StopWatch from '../components/StopWatch';
 
 const mapStateToProps = (state) => {
     return {
@@ -36,9 +37,10 @@ const SetTracking = (props) => {
                     <H1>Exercise Set 1</H1>
                     <Incrementor metric={'Reps'} increment={5}/>
                     <Incrementor metric={'Weight'} increment={1}/>
+                    <StopWatch />
                 </Form>
             </Container>    
         );     
-}
+}  
 
 export default connect(mapStateToProps)(SetTracking);  
