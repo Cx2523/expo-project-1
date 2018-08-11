@@ -8,19 +8,22 @@ class StopWatch extends Component {
         this.state = {
             value: 0,
             timer: null,
-            timerIsRunning: false
+            timerIsRunning: false,
+            timeIsSaved: false
         };
         this.tick = this.tick.bind(this);
         this.startTime = this.startTime.bind(this);
         this.stopTime = this.stopTime.bind(this);
         this.pauseTime = this.pauseTime.bind(this);
         this.msToTime = this.msToTime.bind(this);
+        this.resetTime = this.resetTime.bind(this);
     }
 
     startTime() { 
             this.setState({
                 timer: setInterval(this.tick,100),
-                timerIsRunning: true
+                timerIsRunning: true,
+                timeIsSaved: false
             });
     }
 
@@ -36,8 +39,19 @@ class StopWatch extends Component {
         clearInterval(this.state.timer);
         this.setState({
             timer: null,
-            value: 0,
-            timerIsRunning: false
+            timerIsRunning: false,
+            timeIsSaved: true
+        });
+        this.props.sendStopWatchTime(this.state.value);
+    }
+
+    resetTime(){
+        clearInterval(this.state.timer);
+        this.setState({
+            timer: null,
+            timerIsRunning: false,
+            timeIsSaved: false,
+            value: 0
         });
     }
 
@@ -72,7 +86,7 @@ class StopWatch extends Component {
                     }}
                 >Time</H1>
                 <View flexDirection={'row'} justifyContent={'space-around'}>
-                    <Text style={{fontSize: 50, textAlign: 'center'}}>{this.msToTime(this.state.value)}</Text>
+                    <Text style={{fontSize: 50, textAlign: 'center', backgroundColor: this.state.timeIsSaved ? 'rgba(0, 255, 0, 0.2)' : null}}>{this.msToTime(this.state.value)}</Text>
                 </View>
                 <View flexDirection={'row'} justifyContent={'space-around'}>
                 {this.state.timerIsRunning ? 
@@ -98,6 +112,14 @@ class StopWatch extends Component {
                     <Icon 
                         onPress={this.stopTime}
                         name="md-square"
+                        style={{
+                            fontSize: 60,
+                            color:"red"
+                        }}
+                    />
+                    <Icon 
+                        onPress={this.resetTime}
+                        name="md-close"
                         style={{
                             fontSize: 60,
                             color:"red"
