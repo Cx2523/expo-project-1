@@ -23,6 +23,7 @@ class Login extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         Alert.alert('Submit');
+        console.log(JSON.stringify(this.state));
         fetch('https://fitness-tracker-1.herokuapp.com/login', {
             method: 'POST',
             headers: {

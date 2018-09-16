@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => { 
     return {
         exercises: state.Exercises
     }
@@ -23,7 +23,7 @@ class ExerciseEdit extends Component {
             id: null,
             name: '',
             description: '',
-            category: '',
+            category: 'Anaerobic',
             weight: false,
             time: false,
             reps: false

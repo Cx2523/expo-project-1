@@ -1,4 +1,10 @@
-import { ADD_EXERCISE_TO_LOCAL_DATA, INITIALIZE_STATE, DELETE_EXERCISE_FROM_LOCAL_DATA, UPDATE_EXERCISE_IN_LOCAL_DATA } from '../constants';
+import { 
+    ADD_EXERCISE_TO_LOCAL_DATA, 
+    INITIALIZE_STATE, 
+    DELETE_EXERCISE_FROM_LOCAL_DATA, 
+    UPDATE_EXERCISE_IN_LOCAL_DATA,
+    ADD_WORKOUT_TO_LOCAL_DATA
+ } from '../constants';
 
 const initialState = {};
 
@@ -30,6 +36,9 @@ const rootReducer = (state = initialState, action) => {
                     ...state.Exercises.slice(deleteIndex + 1)
                 ]
             }
+
+        case ADD_WORKOUT_TO_LOCAL_DATA:
+            return { ...state, Workouts: [...state.Workouts, action.payload ] }
 
         default: 
             return state;

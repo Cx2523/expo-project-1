@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     Container,
     Header,
-    Content,
+    Content, 
     Text,
     Card,
     CardItem,
@@ -69,6 +69,7 @@ class SetTracking extends Component {
     }
 
     saveSetData(){
+        
         console.log(this.state);
     }
 

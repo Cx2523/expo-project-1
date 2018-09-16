@@ -1,4 +1,10 @@
-import { ADD_EXERCISE_TO_LOCAL_DATA, DELETE_EXERCISE_FROM_LOCAL_DATA, INITIALIZE_STATE, UPDATE_EXERCISE_IN_LOCAL_DATA } from '../constants';
+import { 
+    ADD_EXERCISE_TO_LOCAL_DATA, 
+    DELETE_EXERCISE_FROM_LOCAL_DATA, 
+    INITIALIZE_STATE, 
+    UPDATE_EXERCISE_IN_LOCAL_DATA,
+    ADD_WORKOUT_TO_LOCAL_DATA
+ } from '../constants';
 
 export const addExerciseToLocalData = (exercise) => {
     return {
@@ -20,6 +26,13 @@ export const updateExerciseInLocalData = (exercise) => {
         payload: exercise
     };
 };
+
+export const addWorkoutToLocalData = (workout) => {
+    return {
+        type: ADD_WORKOUT_TO_LOCAL_DATA,
+        payload: workout
+    };
+}
 // getState allows you to access piece of the redux store that are not being passed in on exercise.
 // userID for example
 export const addExerciseToDb = (exercise) => {  
@@ -41,6 +54,28 @@ export const addExerciseToDb = (exercise) => {
                 console.log(error);
             });
         }
+}
+
+export const addWorkoutToDb = (workout) => {
+    return (dispatch, getState) => {
+        workout.UserId = getState().id;
+        return fetch('https://fitness-tracker-1.herokuapp.com/workout', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(workout),
+            })
+            .then(response => response.json())
+            .then(responseJson => { 
+                dispatch(addWorkoutToLocalData(responseJson));
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+    
 }
 
 export const updateExerciseInDb = (exercise) => {  
