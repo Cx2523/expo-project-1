@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => { 
     return {
-        workouts: state.Workouts
+        workouts: state.Workouts 
     };
  };
 

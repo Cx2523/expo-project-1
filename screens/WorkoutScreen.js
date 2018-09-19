@@ -9,20 +9,22 @@ import {
     Icon,
     Button,
     View,
-    Alert
+    H2
 } from 'native-base';
 import { connect } from 'react-redux';
-import { deleteExerciseFromDb } from '../Redux/Actions/actionsIndex';
+import { deleteExerciseFromDb, updateWorkoutInDb } from '../Redux/Actions/actionsIndex';
 
 const mapStateToProps = (state) => {
     return {
-        exercises: state.Exercises
+        exercises: state.Exercises,
+        workouts: state.Workouts
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return { 
-        deleteExerciseFromDb: (id) => dispatch(deleteExerciseFromDb(id))
+        deleteExerciseFromDb: (id) => dispatch(deleteExerciseFromDb(id)),
+        updateWorkoutInDb: (workout) => dispatch(updateWorkoutInDb(workout))
     }
 }
 
@@ -54,6 +56,14 @@ class WorkoutScreen extends Component {
         this.props.navigation.navigate('MySets', {id: id});
     }
 
+    endWorkout = () => {
+        var currentWorkout = Object.assign({}, this.props.workouts[this.props.workouts.length - 1]);
+        console.log('end workout', currentWorkout);
+        currentWorkout.endTime = new Date(); 
+        this.props.updateWorkoutInDb(currentWorkout);
+        this.props.navigation.navigate('UserHome');
+    }
+
     render() {
         return (   
             <Container>
@@ -65,6 +75,7 @@ class WorkoutScreen extends Component {
                     onPress={ this.toggleEditMode }
                 />
                 <Content>
+                    {/* <H2><Text>{this.props.workouts[this.props.workouts.length - 1]}</Text></H2> */}
                     {this.state.editMode ?
                         <Button block bordered success onPress={() => this.goToExerciseEdit()}>
                             <Icon type="FontAwesome" name="plus" />
@@ -108,6 +119,9 @@ class WorkoutScreen extends Component {
                             </Card>
                         )
                     }
+                    <Button block danger onPress={this.endWorkout}>
+                        <Text>END WORKOUT</Text>
+                    </Button>
                 </Content>
             </Container>
         );

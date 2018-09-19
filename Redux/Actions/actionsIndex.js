@@ -3,7 +3,8 @@ import {
     DELETE_EXERCISE_FROM_LOCAL_DATA, 
     INITIALIZE_STATE, 
     UPDATE_EXERCISE_IN_LOCAL_DATA,
-    ADD_WORKOUT_TO_LOCAL_DATA
+    ADD_WORKOUT_TO_LOCAL_DATA,
+    UPDATE_WORKOUT_IN_LOCAL_DATA
  } from '../constants';
 
 export const addExerciseToLocalData = (exercise) => {
@@ -30,6 +31,13 @@ export const updateExerciseInLocalData = (exercise) => {
 export const addWorkoutToLocalData = (workout) => {
     return {
         type: ADD_WORKOUT_TO_LOCAL_DATA,
+        payload: workout
+    };
+}
+
+export const updateWorkoutInLocalData = (workout) => {
+    return {
+        type: UPDATE_WORKOUT_IN_LOCAL_DATA,
         payload: workout
     };
 }
@@ -76,6 +84,28 @@ export const addWorkoutToDb = (workout) => {
             });
         }
     
+}
+
+export const updateWorkoutInDb = (workout) => {  
+    return (dispatch, getState) => {
+        workout.UserId = getState().id;
+        return fetch(`https://fitness-tracker-1.herokuapp.com/workout/${workout.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(workout),
+            })
+            .then(response => response.json())
+            .then(responseJson => { 
+                console.log('update response', responseJson[1][0])
+                dispatch(updateWorkoutInLocalData(responseJson[1][0]));
+            })
+            .catch(error => {
+                console.log(error); 
+            });
+        }
 }
 
 export const updateExerciseInDb = (exercise) => {  
