@@ -37,7 +37,7 @@ const Sets = (props) => {
                     <Card key={exercise.id}>
                     <CardItem 
                         button
-                    onPress={() => props.navigation.navigate('SetTracking')}
+                    onPress={() => props.navigation.navigate('SetTracking', {id: exercise.id })}
                         style={{justifyContent: 'space-between'}}>
                         <Text style={{fontSize: 28}}>{exercise.Name}</Text>
                         {exercise.Time ? 

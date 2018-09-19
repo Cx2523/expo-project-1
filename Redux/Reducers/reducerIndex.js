@@ -4,7 +4,8 @@ import {
     DELETE_EXERCISE_FROM_LOCAL_DATA, 
     UPDATE_EXERCISE_IN_LOCAL_DATA,
     ADD_WORKOUT_TO_LOCAL_DATA,
-    UPDATE_WORKOUT_IN_LOCAL_DATA
+    UPDATE_WORKOUT_IN_LOCAL_DATA,
+    ADD_SET_TO_LOCAL_DATA
  } from '../constants';
 
 const initialState = {};
@@ -40,6 +41,11 @@ const rootReducer = (state = initialState, action) => {
 
         case ADD_WORKOUT_TO_LOCAL_DATA:
             return { ...state, Workouts: [...state.Workouts, action.payload ] }
+
+        case ADD_SET_TO_LOCAL_DATA:
+            let currentWorkout = Object.assign({}, state.Workouts[state.Workouts.length - 1]);
+            currentWorkout.Sets.push(action.payload);
+            return { ...state, Workouts: [...state.Workouts, currentWorkout ] }
 
         case UPDATE_WORKOUT_IN_LOCAL_DATA:
             let workoutUpdateIndex = state.Workouts.findIndex(workout => workout.id === action.payload.id);

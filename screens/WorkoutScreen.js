@@ -8,8 +8,7 @@ import {
     CardItem,
     Icon,
     Button,
-    View,
-    H2
+    View
 } from 'native-base';
 import { connect } from 'react-redux';
 import { deleteExerciseFromDb, updateWorkoutInDb } from '../Redux/Actions/actionsIndex';

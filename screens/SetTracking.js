@@ -16,6 +16,7 @@ import {
 import { connect } from 'react-redux';
 import Incrementor from '../components/Incrementor';
 import StopWatch from '../components/StopWatch';
+import { addSetToDb } from '../Redux/Actions/actionsIndex';
 
 const mapStateToProps = (state) => {
     return {
@@ -24,17 +25,20 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return {};
+    return {
+        addSetToDb: set => dispatch(addSetToDb(set))
+    };
 } 
 
 class SetTracking extends Component {
     constructor(props){
         super(props);
         this.state = {
-            Reps: 0, 
-            Weight: 0,
-            Time: 0,
-            timestamp: ''
+            reps: 0, 
+            weight: 0,
+            time: 0,
+            ExerciseId: props.navigation.state.params.id
+
         }
         this.increaseMetric = this.increaseMetric.bind(this);
         this.decreaseMetric = this.decreaseMetric.bind(this);
@@ -65,12 +69,12 @@ class SetTracking extends Component {
     }
 
     getStopWatchTime(timeValue){
-        this.setState({Time: timeValue});
+        this.setState({time: timeValue});
     }
 
     saveSetData(){
-        
         console.log(this.state);
+        this.props.addSetToDb(this.state);
     }
 
     render(){
@@ -79,15 +83,15 @@ class SetTracking extends Component {
                 <Form>
                     <H1>ExerciseName Set 1</H1>
                     <Incrementor 
-                        value={this.state.Reps} 
-                        increaseMetric={() => this.increaseMetric('Reps', 1)}
-                        decreaseMetric={() => this.decreaseMetric('Reps', 1)}
+                        value={this.state.reps} 
+                        increaseMetric={() => this.increaseMetric('reps', 1)}
+                        decreaseMetric={() => this.decreaseMetric('reps', 1)}
                         metric={'Reps'}
                     />
                     <Incrementor 
-                        value={this.state.Weight} 
-                        increaseMetric={() => this.increaseMetric('Weight', 5)}
-                        decreaseMetric={() => this.decreaseMetric('Weight', 5)}
+                        value={this.state.weight} 
+                        increaseMetric={() => this.increaseMetric('weight', 5)}
+                        decreaseMetric={() => this.decreaseMetric('weight', 5)}
                         metric={'Weight'}
                     />
                     
@@ -99,4 +103,4 @@ class SetTracking extends Component {
     }
 }
 
-export default connect(mapStateToProps)(SetTracking);  
+export default connect(mapStateToProps, mapDispatchToProps)(SetTracking);  
