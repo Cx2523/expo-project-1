@@ -40,6 +40,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case ADD_WORKOUT_TO_LOCAL_DATA:
+            action.payload.Sets = [];
             return { ...state, Workouts: [...state.Workouts, action.payload ] }
 
         case ADD_SET_TO_LOCAL_DATA:

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TextInput, Button, View, AppRegistry, Alert } from 'react-native';
+import { TextInput, View, AppRegistry, Alert } from 'react-native';
+import { Button, Form, Item, Label, Input, Text, Container, Content } from 'native-base';
 import { styles } from '../styles/stylesheet';
 import { UserHomeScreen } from '../screens/UserHomeScreen';
 import { connect } from 'react-redux';
@@ -9,8 +10,8 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: 'username',
-            password: 'password'
+            username: '',
+            password: ''
         };
     }
 
@@ -32,39 +33,42 @@ class Login extends React.Component {
             },
             body: JSON.stringify(this.state),
         })
-        .then(response => response.json())
-        .then(responseJson => { 
-            console.log(responseJson);
-            this.props.initializeState(responseJson);
-            this.props.navigate('UserHome');
-            
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .then(response => response.json())
+            .then(responseJson => {
+                console.log(responseJson);
+                this.props.initializeState(responseJson);
+                this.props.navigate('UserHome');
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     render() {
         return (
-            <View style={styles.container} contentContainerStyle={styles.contentContainer}>
-                <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, width:'90%'}}
-                    onChangeText={(text) => this.setState({ username: text})}
-                    value={this.state.username}
-                />
-                <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: '90%'}}
-                    onChangeText={(text) => this.setState({password: text})}
-                    value={this.state.password}
-                />
-
+            <Form style={{justifyContent: 'center'}}>
+                <Item floatingLabel>
+                    <Label>Username</Label>
+                    <Input
+                        onChangeText={(text) => this.setState({ username: text })}
+                        value={this.state.username}
+                    />
+                </Item>
+                <Item floatingLabel>
+                    <Label>Password</Label>
+                    <Input
+                        onChangeText={(text) => this.setState({ password: text })}
+                        value={this.state.password}
+                    />
+                </Item>
                 <Button
                     onPress={this.handleSubmit}
-                    title="LOGIN"
-                    color="#841584"
-                    accessibilityLabel="Learn more about this purple button"
-                />
-            </View>
+                    primary
+                    style={styles.centeredButton}
+                >
+                    <Text>Log In</Text>
+                </Button>
+            </Form>    
         );
     }
 }

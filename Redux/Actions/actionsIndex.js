@@ -75,6 +75,7 @@ export const addExerciseToDb = (exercise) => {
 export const addWorkoutToDb = (workout) => {
     return (dispatch, getState) => {
         workout.UserId = getState().id;
+        workout.Sets = [];
         return fetch('https://fitness-tracker-1.herokuapp.com/workout', {
                 method: 'POST',
                 headers: {
@@ -85,6 +86,7 @@ export const addWorkoutToDb = (workout) => {
             })
             .then(response => response.json())
             .then(responseJson => { 
+                console.log('Workout response', responseJson);
                 dispatch(addWorkoutToLocalData(responseJson));
             })
             .catch(error => {

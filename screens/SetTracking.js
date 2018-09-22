@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import Incrementor from '../components/Incrementor';
 import StopWatch from '../components/StopWatch';
 import { addSetToDb } from '../Redux/Actions/actionsIndex';
+import RedirectModal from '../components/RedirectModal';
 
 const mapStateToProps = (state) => {
     return {
@@ -38,7 +39,6 @@ class SetTracking extends Component {
             weight: 0,
             time: 0,
             ExerciseId: props.navigation.state.params.id
-
         }
         this.increaseMetric = this.increaseMetric.bind(this);
         this.decreaseMetric = this.decreaseMetric.bind(this);
@@ -75,6 +75,7 @@ class SetTracking extends Component {
     saveSetData(){
         console.log(this.state);
         this.props.addSetToDb(this.state);
+        this.render(() => <RedirectModal modalVisible={true} />)
     }
 
     render(){

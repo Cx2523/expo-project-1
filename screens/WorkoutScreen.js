@@ -8,7 +8,8 @@ import {
     CardItem,
     Icon,
     Button,
-    View
+    View,
+    H2
 } from 'native-base';
 import { connect } from 'react-redux';
 import { deleteExerciseFromDb, updateWorkoutInDb } from '../Redux/Actions/actionsIndex';
@@ -74,7 +75,8 @@ class WorkoutScreen extends Component {
                     onPress={ this.toggleEditMode }
                 />
                 <Content>
-                    {/* <H2><Text>{this.props.workouts[this.props.workouts.length - 1]}</Text></H2> */}
+                    <H2>{this.props.workouts[this.props.workouts.length - 1].Name}</H2>
+                    <Text>Select your next exercise: </Text>
                     {this.state.editMode ?
                         <Button block bordered success onPress={() => this.goToExerciseEdit()}>
                             <Icon type="FontAwesome" name="plus" />
