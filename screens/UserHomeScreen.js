@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Container, Header, Content, Button, Text, Accordion } from 'native-base';
 import { addWorkoutToDb } from '../Redux/Actions/actionsIndex';
 import { connect } from 'react-redux';
+import PieChartExample from '../components/PieChart';
+import { styles } from '../styles/stylesheet';
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -28,9 +30,14 @@ class UserHomeScreen extends Component {
         navigate('Workout');
     }
  
-    goToAddExercise = () => {
+    goToMyExercises = () => {
         const { navigate } = this.props.navigation;
-        navigate('MyExercises', {id: null});
+        navigate('MyExercises');
+    }
+
+    goToMyWorkouts = () => {
+        const { navigate } = this.props.navigation;
+        navigate('MyWorkouts');
     }
 
     render() {
@@ -38,11 +45,21 @@ class UserHomeScreen extends Component {
         return (
             <Container>
                 <Content>
-                    <Button block primary onPress={this.goToAddExercise}>
-                        <Text>Add an Exercise</Text>
-                    </Button>
-                    <Button block success onPress={this.startWorkout}>
+                    <Button success style={styles.centeredButton}
+                        onPress={this.startWorkout}
+                    >
                         <Text>START WORKOUT!</Text>
+                    </Button>
+                    <PieChartExample />
+                    <Button primary style={styles.centeredButton}
+                        onPress={this.goToMyExercises}
+                    >
+                        <Text>My Exercises</Text>
+                    </Button>
+                    <Button primary style={styles.centeredButton}
+                        onPress={this.goToMyWorkouts}
+                    >
+                        <Text>My Workouts</Text>
                     </Button>
                 </Content>
             </Container>

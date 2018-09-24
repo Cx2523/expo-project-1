@@ -11,6 +11,10 @@ import WorkoutScreen from '../screens/WorkoutScreen';
 import MyExercisesScreen from '../screens/MyExercisesScreen';
 import Sets from '../screens/Sets';
 import SetTracking from '../screens/SetTracking';
+import SignUpScreen from '../screens/SignUpScreen';
+import ExerciseEditor from '../screens/ExerciseEditor'
+import MyWorkouts from '../screens/MyWorkouts';
+import WorkoutDetails from '../screens/WorkoutDetails';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -18,7 +22,11 @@ const HomeStack = createStackNavigator({
   Workout: WorkoutScreen,
   MyExercises: MyExercisesScreen,
   MySets: Sets,
-  SetTracking: SetTracking
+  SetTracking: SetTracking,
+  SignUp: SignUpScreen,
+  ExerciseEditor: ExerciseEditor,
+  MyWorkouts: MyWorkouts,
+  WorkoutDetails: WorkoutDetails
 });
 
 HomeStack.navigationOptions = {

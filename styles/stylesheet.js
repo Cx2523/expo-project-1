@@ -19,7 +19,11 @@ export const styles = StyleSheet.create({
       marginTop: '5%',
       marginLeft: 'auto',
       marginRight:'auto',
-      marginBottom: '5%'
+      marginBottom: '5%',
+      alignItems: 'center',
+    },
+    buttonText: {
+      fontSize: 18
     }
 });  
     
