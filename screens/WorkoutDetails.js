@@ -9,45 +9,64 @@ import {
     Icon,
     Button,
     View,
-    H2
+    H2,
+    List,
+    ListItem
 } from 'native-base';
 import { connect } from 'react-redux';
 import { deleteExerciseFromDb, updateWorkoutInDb } from '../Redux/Actions/actionsIndex';
 import { styles } from '../styles/stylesheet';
+
+const getExerciseName = (exerciseId, exercises) => exercises.find(exercise => exercise.id === exerciseId).Name;
+
+const exerciseIsInWorkout = (exerciseId, sets) => {
+    return sets.some(set => {
+        return set.ExerciseId === exerciseId;
+    });
+}
 
 const mapStateToProps = (state, ownProps) => {
     const currentWorkout = state.Workouts.find(workout => {
         return workout.id === ownProps.navigation.state.params.id;
     });
     return {
-        currentWorkout: currentWorkout
+        currentWorkout: currentWorkout,
+        exercises: state.Exercises
     }
 };
 
 const WorkoutDetails = (props) => {
-
-    const WorkoutId = props.navigation.state.params.id;
-
     return (
         <Container>
             <Content>
                 <Text>Work out details</Text>
-                {props.currentWorkout.Sets
-                    .map(set =>
-                        <Card key={set.id}>
-                            <CardItem button>
-                                <Text style={{ fontSize: 18 }}>Exercise: {set.ExerciseId}</Text>
-                                <Text style={{ fontSize: 18 }}>Reps: {set.Reps}</Text>
-                                <Text style={{ fontSize: 18 }}>Time: {set.Time}</Text>
-                                <Text style={{ fontSize: 18 }}>Weight: {set.Weight}</Text>
-                            </CardItem>
-                        </Card>
-                    )
-                }
+                {props.exercises.map(exercise => {
+                    if (exerciseIsInWorkout(exercise.id, props.currentWorkout.Sets)) {
+                        return <View key={exercise.id}>
+                                    <ListItem itemHeader>
+                                        <Text>{exercise.Name}</Text>
+                                    </ListItem>
+                                    {
+                                        props.currentWorkout.Sets.map(set => {
+                                            if (set.ExerciseId === exercise.id) {
+                                                return <ListItem key={set.id}>
+                                                            <Text>Reps: {set.Reps}</Text>
+                                                            <Text>Time: {set.Time}</Text>
+                                                            <Text>Weight: {set.Reps}</Text>
+                                                        </ListItem>
+                                                
+                                            }
+                                        })
+                                    }
+                                </View>
+
+                    }
+                })}
+
             </Content>
         </Container>
     );
-    
+
 }
 
 export default connect(mapStateToProps)(WorkoutDetails);

@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "expo-project-1",
+    "name": "expoProject1",
     "description": "A very interesting project.",
-    "slug": "expo-project-1",
+    "slug": "expoProject1",
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
