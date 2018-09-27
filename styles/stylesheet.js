@@ -7,7 +7,10 @@ export const styles = StyleSheet.create({
     },
     homeScreenContainer:{
       padding:'10%',
-      backgroundColor: '#2d7eff'
+      backgroundColor: '#2d7eff',
+      flex: 1, 
+      // height: screenHeight,
+      justifyContent: 'center'
     },
     marginAuto:{
       marginLeft: 'auto',
@@ -16,14 +19,16 @@ export const styles = StyleSheet.create({
     centeredButton:{
       width: '80%', 
       justifyContent: 'center',
+      alignItems: 'stretch',
       marginTop: '5%',
       marginLeft: 'auto',
       marginRight:'auto',
-      marginBottom: '5%',
-      alignItems: 'center',
+      marginBottom: '5%'
     },
     buttonText: {
-      fontSize: 18
+      fontSize: 18,
+      alignSelf: 'stretch',
+      padding:0,
+      margin:0 
     }
-});  
-    
+});    

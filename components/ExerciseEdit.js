@@ -64,7 +64,7 @@ class ExerciseEdit extends Component {
         } else {
             this.props.addExerciseToDb(this.state); 
         }
-        this.props.navigate('Workout');
+        this.props.navigate('MyExercises');
 
     }
 

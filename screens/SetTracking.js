@@ -73,13 +73,15 @@ class SetTracking extends Component {
     }
 
     saveSetData(){
+        const { goBack } = this.props.navigation;
         console.log(this.state);
         this.props.addSetToDb(this.state);
-        this.render(() => <RedirectModal modalVisible={true} />)
+        // this.render(() => <RedirectModal modalVisible={true} />)
+        goBack();
     }
 
-    render(){
-        return ( 
+    render(){  
+        return (   
             <Container>
                 <Form>
                     <H1>ExerciseName Set 1</H1>

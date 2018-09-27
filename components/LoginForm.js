@@ -44,6 +44,10 @@ class Login extends React.Component {
             .then(responseJson => {
                 console.log(responseJson);
                 this.props.initializeState(responseJson);
+                this.setState({
+                    username: '',
+                    password: ''
+                });
                 this.props.navigate('UserHome');
             })
             .catch(error => {

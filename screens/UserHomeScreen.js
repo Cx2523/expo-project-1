@@ -41,7 +41,6 @@ class UserHomeScreen extends Component {
     }
 
     render() {
-        
         return (
             <Container>
                 <Content>

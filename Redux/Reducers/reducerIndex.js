@@ -5,7 +5,8 @@ import {
     UPDATE_EXERCISE_IN_LOCAL_DATA,
     ADD_WORKOUT_TO_LOCAL_DATA,
     UPDATE_WORKOUT_IN_LOCAL_DATA,
-    ADD_SET_TO_LOCAL_DATA
+    ADD_SET_TO_LOCAL_DATA,
+    USER_LOGOUT
  } from '../constants';
 
 const initialState = {};
@@ -14,7 +15,10 @@ const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case INITIALIZE_STATE:
             return Object.assign({}, action.payload);
-    
+        
+        case USER_LOGOUT:
+            return undefined;
+
         case ADD_EXERCISE_TO_LOCAL_DATA:
             return { ...state, Exercises: [...state.Exercises, action.payload ]}
     
