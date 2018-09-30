@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Textarea, Container, Button, Content, Form, Item, Input, Picker,  Text, H3 } from 'native-base';
+import { Textarea, Card, Container, Button, Content, Form, Item, Input, Picker, Text, H3, Label } from 'native-base';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { addExerciseToDb, updateExerciseInDb } from '../Redux/Actions/actionsIndex';
+import { styles } from '../styles/stylesheet';
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -10,7 +12,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => {
     return {
         exercises: state.Exercises
     }
@@ -40,18 +42,18 @@ class ExerciseEdit extends Component {
                 description: exerciseToEdit.Description,
                 category: exerciseToEdit.Category,
                 weight: exerciseToEdit.Weight,
-                time: exerciseToEdit.Time, 
-                reps: exerciseToEdit.Reps 
+                time: exerciseToEdit.Time,
+                reps: exerciseToEdit.Reps
             }));
         }
     }
 
     metricCheckBoxUpdate = (metric) => {
-        this.setState(prevState => {  
+        this.setState(prevState => {
             return {
-                [metric] : !prevState[metric]
+                [metric]: !prevState[metric]
             }
-        }); 
+        });
     }
 
     categorySelectorChange = (value) => {
@@ -59,10 +61,10 @@ class ExerciseEdit extends Component {
     }
 
     handleSubmit = () => {
-        if (this.state.id) { 
+        if (this.state.id) {
             this.props.updateExerciseInDb(this.state);
         } else {
-            this.props.addExerciseToDb(this.state); 
+            this.props.addExerciseToDb(this.state);
         }
         this.props.navigate('MyExercises');
 
@@ -73,57 +75,62 @@ class ExerciseEdit extends Component {
             <Container style={{ marginLeft: '5%', marginRight: '5%' }}>
                 <Content>
                     <Form>
-                        <Item floatingLabel>
-                            <Input
-                                placeholder="name"
-                                style={{
-                                    marginTop: '2%',
-                                    marginBottom: '2%' 
-                                }}
-                                onChangeText={(text) => this.setState({ name: text })} 
-                                value={this.state.name}
-                            />  
-                        </Item> 
-                        <Textarea rowSpan={3} bordered placeholder="description" />
-                        <H3>Category</H3>
-                        <Item picker style={{ marginTop: '2%', marginBottom: '2%' }}>
-                            <Picker
-                                mode="dropdown"
-                                placeholder="Category"
-                                placeholderStyle={{ color: "#bfc6ea" }}
-                                placeholderIconColor="#007aff"
-                                selectedValue={this.state.category}
-                                onValueChange={this.categorySelectorChange}
-                            >
-                                <Picker.Item label="Strength / Anaerobic" value="Anaerobic" />
-                                <Picker.Item label="Endurance / Aerobic" value="Aerobic" />
-                                <Picker.Item label="Flexibility" value="Flexibility" />
-                                <Picker.Item label="Balance" value="Balance" />
-                            </Picker>
-                        </Item>
-                        <H3>Metrics</H3>
-                        <Button block bordered={!this.state.reps} onPress={() => this.metricCheckBoxUpdate('reps')} style={{ marginTop: '2%', marginBottom: '2%' }}>
-                            <Text>Reps</Text>
-                        </Button>
-                        <Button block bordered={!this.state.time} onPress={() => this.metricCheckBoxUpdate('time')} style={{ marginTop: '2%', marginBottom: '2%' }}>
-                            <Text>Time</Text>
-                        </Button>
-                        <Button block bordered={!this.state.weight} onPress={() => this.metricCheckBoxUpdate('weight')} style={{ marginTop: '2%', marginBottom: '2%' }}>
-                            <Text>Weight</Text>
-                        </Button>
+                        <Card style={{ margin: '2%' }}>
+                            <H3 style={{ backgroundColor: '#2d7eff', color: 'white', padding:'2%' }}>NAME</H3>
+                            <Item>
+                                <Input underline
+                                    onChangeText={(text) => this.setState({ name: text })}
+                                    value={this.state.name}
+                                    style={{textAlign: 'center'}}
+                                />
+                            </Item>
+                            {/* <Textarea rowSpan={3} bordered placeholder="description" /> */}
+                        </Card>
+                        <Card style={{ margin: '2%'}}>
+                            <H3 style={{ backgroundColor: '#2d7eff', color: 'white', padding:'2%' }}>CATEGORY</H3>
+                            <Item picker style={{ margin: '1%' }}>
+                                <Picker
+                                    mode="dropdown"
+                                    placeholder="Category"
+                                    placeholderStyle={{ color: "#bfc6ea" }}
+                                    placeholderIconColor="#007aff"
+                                    selectedValue={this.state.category}
+                                    onValueChange={this.categorySelectorChange}
+                                    itemStyle={{textAlign:'center'}}
+                                >
+                                    <Picker.Item label="Strength / Anaerobic" value="Anaerobic" />
+                                    <Picker.Item label="Endurance / Aerobic" value="Aerobic"/>
+                                    <Picker.Item label="Flexibility" value="Flexibility"/>
+                                    <Picker.Item label="Balance" value="Balance"/>
+                                </Picker>
+                            </Item>
+                        </Card>
+                        <Card style={{ margin: '2%'}}>
+                            <H3 style={{ backgroundColor: '#2d7eff', color: 'white', padding: '2%' }}>METRICS</H3>
+                            <Button block bordered={!this.state.reps} onPress={() => this.metricCheckBoxUpdate('reps')} style={{ marginTop: '2%', marginBottom: '2%' }}>
+                                <Text>Reps</Text>
+                            </Button>
+                            <Button block bordered={!this.state.time} onPress={() => this.metricCheckBoxUpdate('time')} style={{ marginTop: '2%', marginBottom: '2%' }}>
+                                <Text>Time</Text>
+                            </Button>
+                            <Button block bordered={!this.state.weight} onPress={() => this.metricCheckBoxUpdate('weight')} style={{ marginTop: '2%', marginBottom: '2%' }}>
+                                <Text>Weight</Text>
+                            </Button>
+                        </Card>
                     </Form>
                     <Button
-                    onPress={this.handleSubmit}
-                    success
-                    block
-                >
-                    <Text>Save</Text>
-                </Button>
+                        onPress={this.handleSubmit}
+                        success
+                        rounded
+                        style={styles.centeredButton}
+                    >
+                        <Text>Save</Text>
+                    </Button>
                 </Content>
             </Container>
 
         );
     }
-} 
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExerciseEdit); 

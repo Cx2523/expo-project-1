@@ -30,7 +30,6 @@ class Login extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        Alert.alert('Submit');
         console.log(JSON.stringify(this.state));
         fetch('https://fitness-tracker-1.herokuapp.com/login', {
             method: 'POST',
@@ -58,34 +57,37 @@ class Login extends React.Component {
 
     render() {
         return (
-            <Form style={{justifyContent: 'center'}}>
-                <Item floatingLabel error={this.state.invalidLogin}>
-                    <Label>Username</Label>
-                    <Input
-                        onChangeText={(text) => this.setState({ username: text })}
-                        value={this.state.username}
-                        onFocus={() => this.clearError()}
-                    />
-                    {this.state.invalidLogin ? <Icon name='close-circle' /> : null}
-                </Item>
-                <Item floatingLabel error={this.state.invalidLogin}>
-                    <Label>Password</Label>
-                    <Input
-                        onChangeText={(text) => this.setState({ password: text })}
-                        value={this.state.password}
-                        onFocus={() => this.clearError()}
-                    />
-                    {this.state.invalidLogin ? <Icon name='close-circle' /> : null}
-                </Item>
-                {this.state.invalidLogin ? <Text style={[{color:'red'} ,styles.marginAuto]}>Invalid Username / Password</Text>: null}
-                <Button
-                    onPress={this.handleSubmit}
-                    primary
-                    style={styles.centeredButton}
-                >
-                    <Text style={styles.buttonText}>Log In</Text>
-                </Button>
-            </Form>    
+            <View>
+                <Form style={{justifyContent: 'center'}}>
+                    <Item floatingLabel error={this.state.invalidLogin}>
+                        <Label>Username</Label>
+                        <Input
+                            onChangeText={(text) => this.setState({ username: text.trim() })}
+                            value={this.state.username}
+                            onFocus={() => this.clearError()}
+                        />
+                        {this.state.invalidLogin ? <Icon name='close-circle' /> : null}
+                    </Item>
+                    <Item floatingLabel error={this.state.invalidLogin}>
+                        <Label>Password</Label>
+                        <Input
+                            onChangeText={(text) => this.setState({ password: text.trim() })}
+                            value={this.state.password}
+                            onFocus={() => this.clearError()}
+                        />
+                        {this.state.invalidLogin ? <Icon name='close-circle' /> : null}
+                    </Item>
+                    {this.state.invalidLogin ? <Text style={[{color:'red'} ,styles.marginAuto]}>Invalid Username / Password</Text>: null}
+
+                    <Button 
+                        rounded primary
+                        style={[styles.centeredButton, {marginTop: '10%'}]}
+                        onPress={this.handleSubmit}  
+                    >
+                  <Text>Log In</Text>  
+              </Button>
+                </Form> 
+            </View>   
         );
     }
 }

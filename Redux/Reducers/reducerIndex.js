@@ -50,17 +50,26 @@ const rootReducer = (state = initialState, action) => {
         case ADD_SET_TO_LOCAL_DATA:
             let currentWorkout = Object.assign({}, state.Workouts[state.Workouts.length - 1]);
             currentWorkout.Sets.push(action.payload);
-            return { ...state, Workouts: [...state.Workouts, currentWorkout ] }
+            console.log('-------------------current workout after adding set -------------------', currentWorkout);  
+            let newWorkoutList = [...state.Workouts];
+            newWorkoutList.pop();
+            newWorkoutList.push(currentWorkout);
+            console.log('------------------new workout list------------------', newWorkoutList)
+            return { ...state, Workouts: [...newWorkoutList] }  
 
         case UPDATE_WORKOUT_IN_LOCAL_DATA:
             let workoutUpdateIndex = state.Workouts.findIndex(workout => workout.id === action.payload.id);
-            return {
+            console.log('--------------update work outs state.workouts---------------------', state.Workouts);
+            const newWorkouts = [...state.Workouts];
+            console.log('--------------update work outs copy---------------------', newWorkouts);
+            newWorkouts.pop();
+            console.log('--------------update work outs copy after pop ---------------------', newWorkouts);
+            newWorkouts.push(action.payload);
+            console.log('--------------update work outs copy after push---------------------', newWorkouts);
+
+            return {  
                 ...state, 
-                Workouts: [
-                    ...state.Workouts.slice(0, workoutUpdateIndex),
-                    action.payload, 
-                    ...state.Workouts.slice(workoutUpdateIndex + 1)
-                ]
+                Workouts: newWorkouts
             } 
 
         default:

@@ -40,7 +40,7 @@ const Sets = (props) => {
                 </Header>   
 
                 <View>  
-                    <Button style={styles.centeredButton} bordered success onPress={() => props.navigation.navigate('SetTracking', {id: props.currentExercise.id })}>
+                    <Button style={styles.centeredButton} success rounded onPress={() => props.navigation.navigate('SetTracking', {id: props.currentExercise.id })}>
                         {/* <Icon type="FontAwesome" name="plus" /> */}
                         <Text style={styles.buttonText}>
                             Start a New Set
@@ -48,7 +48,7 @@ const Sets = (props) => {
                     </Button>  
                     {props.currentSets.map((set, i) => 
                         <Card key={set.id}>
-                        <CardItem
+                        <CardItem 
                             style={{justifyContent: 'space-between'}}>
                             <Text style={{fontSize: 28}}>{`Set # ${i + 1}`}</Text>
                             {props.currentExercise.Time ? 
@@ -66,12 +66,12 @@ const Sets = (props) => {
                         </CardItem>
                         </Card>
                     )}
-                    <Button style={styles.centeredButton} bordered danger onPress={() => navigate('Workout')}>
+                    <Button style={styles.centeredButton} danger rounded onPress={() => navigate('Workout')}>
                         <Text style={styles.buttonText}>END {props.currentExercise.Name}</Text>
                     </Button>
                 </View>
-            </Container>    
+            </Container>      
         );   
 }
 
-export default connect(mapStateToProps)(Sets);
+export default connect(mapStateToProps)(Sets);  

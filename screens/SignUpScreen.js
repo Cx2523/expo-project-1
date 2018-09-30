@@ -20,13 +20,9 @@ class SignUpScreen extends React.Component {
   render() {  
     return (
         <View style={styles.homeScreen}> 
-          <Container>
-            <Header>
-                <Text>
-                    Sign Up For Free
-                </Text>
-            </Header>
+          <Container style={styles.homeScreenContainer}>
             <Content>
+              <H1 style={[styles.marginAuto, styles.homePageHeader]}>Sign Up for Free!</H1>
               <SignUp navigate={this.props.navigation.navigate}/>
             </Content>
           </Container>

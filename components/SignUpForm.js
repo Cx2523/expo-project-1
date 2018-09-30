@@ -17,7 +17,7 @@ class SignUp extends React.Component {
 
     handleChange = name => event => {
         this.setState({
-            [name]: event.target.value,
+            [name]: event.target.value.trim(),
         });
     };
 
@@ -33,11 +33,29 @@ class SignUp extends React.Component {
             },
             body: JSON.stringify(this.state),
         })
-            .then(response => response.json())
-            .then(responseJson => {
-                console.log(responseJson);
-                this.props.initializeState(responseJson);
-                this.props.navigate('UserHome');
+            .then(response => {
+                fetch('https://fitness-tracker-1.herokuapp.com/login', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(this.state),
+                })
+                    .then(response => response.json())
+                    .then(responseJson => {
+                        console.log(responseJson);``
+                        this.props.initializeState(responseJson);
+                        this.setState({
+                            username: '',
+                            password: ''
+                        });
+                        this.props.navigate('UserHome');
+                    })
+                    .catch(error => {
+                        this.setState({ invalidLogin: true });
+                        console.log(error);
+                    });
             })
             .catch(error => {
                 console.log(error);
@@ -46,7 +64,7 @@ class SignUp extends React.Component {
 
     render() {
         return (
-            <Form style={{justifyContent: 'center'}}>
+            <Form style={{ justifyContent: 'center' }}>
                 <Item floatingLabel>
                     <Label>Username</Label>
                     <Input
@@ -63,12 +81,12 @@ class SignUp extends React.Component {
                 </Item>
                 <Button
                     onPress={this.handleSubmit}
-                    primary
+                    success rounded
                     style={styles.centeredButton}
                 >
                     <Text>Sign Up</Text>
                 </Button>
-            </Form>    
+            </Form>
         );
     }
 }

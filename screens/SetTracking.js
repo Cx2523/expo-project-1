@@ -99,7 +99,7 @@ class SetTracking extends Component {
                     />
                     
                     <StopWatch sendStopWatchTime={this.getStopWatchTime}/>
-                    <Button block primary onPress={this.saveSetData}><Text>Save Set</Text></Button>
+                    <Button block primary rounded onPress={this.saveSetData}><Text>Save Set</Text></Button> 
                 </Form>
             </Container>    
         );    

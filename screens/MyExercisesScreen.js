@@ -9,7 +9,7 @@ import {
     Icon,
     Button,
     View,
-    H2
+    H1
 } from 'native-base';
 import { connect } from 'react-redux';
 import { deleteExerciseFromDb, updateWorkoutInDb } from '../Redux/Actions/actionsIndex';
@@ -49,7 +49,10 @@ class WorkoutScreen extends Component {
         return (
             <Container>
                 <Content>
-                    <Button success style={styles.centeredButton}
+                    <H1 style={{margin: '2%'}}>My Exercises:</H1>
+                    <Button 
+                        success rounded 
+                        style={styles.centeredButton}
                         onPress={() => this.goToExerciseEdit()}
                     >
                         <Text>
@@ -57,8 +60,8 @@ class WorkoutScreen extends Component {
                         </Text>
                         <Icon type="FontAwesome" name="plus" />
                     </Button>
-
-                    {this.props.exercises
+ 
+                    {this.props.exercises ? this.props.exercises
                         .map(exercise =>
                             <Card key={exercise.id}>
                                 <CardItem button onPress={() => this.goToExerciseEdit(exercise.id)} style={{ justifyContent: 'space-between' }}>
@@ -86,9 +89,10 @@ class WorkoutScreen extends Component {
                                 </CardItem>
                             </Card>
                         )
+                        : <Text>...add some exercises to get started.</Text>
                     }
                 </Content>
-            </Container>
+            </Container> 
         );
     }
 }

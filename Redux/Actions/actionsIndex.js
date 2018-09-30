@@ -138,7 +138,7 @@ export const updateWorkoutInDb = (workout) => {
             })
             .then(response => response.json())
             .then(responseJson => { 
-                console.log('update response', responseJson[1][0])
+                console.log('---------------UPDATE RESPONSE--------------------------', responseJson)
                 dispatch(updateWorkoutInLocalData(responseJson[1][0]));
             })
             .catch(error => {

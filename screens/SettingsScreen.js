@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class SettingsScreen extends React.Component {
   static navigationOptions = {
-    title: 'app.json',
+    // title: 'app.json',
   };
 
   handleLogout = () => {
@@ -21,19 +21,23 @@ class SettingsScreen extends React.Component {
     this.props.navigation.navigate('Home');
   }
 
+  handleReset = () => {
+    Alert.alert('This function is not available in current demo version');
+  }
+
   render() {
     return (
       <View>
         <Button
             onPress={this.handleLogout}
-            warning
+            warning rounded
             style={styles.centeredButton}
         >
             <Text>Log Out</Text>
         </Button>
         <Button
-            // onPress={this.handleLogout}
-            danger
+            onPress={this.handleReset}
+            danger rounded
             style={styles.centeredButton}
         >
             <Text>Reset My Data</Text>

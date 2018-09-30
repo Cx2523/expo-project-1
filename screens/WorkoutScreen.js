@@ -13,6 +13,7 @@ import {
 } from 'native-base';
 import { connect } from 'react-redux';
 import { deleteExerciseFromDb, updateWorkoutInDb } from '../Redux/Actions/actionsIndex';
+import { styles } from '../styles/stylesheet';
 
 const mapStateToProps = (state) => {
     return {
@@ -58,7 +59,7 @@ class WorkoutScreen extends Component {
 
     endWorkout = () => {
         var currentWorkout = Object.assign({}, this.props.workouts[this.props.workouts.length - 1]);
-        console.log('end workout', currentWorkout);
+        console.log('-------------------END WORKOUT--------------', currentWorkout);
         currentWorkout.endTime = new Date(); 
         this.props.updateWorkoutInDb(currentWorkout);
         this.props.navigation.navigate('UserHome');
@@ -67,16 +68,18 @@ class WorkoutScreen extends Component {
     render() {
         return (   
             <Container>
-                <Icon type="FontAwesome" name="gear" 
+                {/* <Icon type="FontAwesome" name="gear" 
                     style={{
                         color: "#ff6600",
                         fontSize: 34
                     }}
                     onPress={ this.toggleEditMode }
-                />
+                /> */}
                 <Content>
-                    <H2>{this.props.workouts[this.props.workouts.length - 1].Name}</H2>
-                    <Text>Select your next exercise: </Text>
+                    <View style={{justifyContent:'center'}}>
+                        <H2>{this.props.workouts[this.props.workouts.length - 1].Name}</H2>
+                        <Text style={{margin:'2%'}}>Select your next exercise: </Text>
+                    </View>
                     {this.state.editMode ?
                         <Button block bordered success onPress={() => this.goToExerciseEdit()}>
                             <Icon type="FontAwesome" name="plus" />
@@ -88,7 +91,7 @@ class WorkoutScreen extends Component {
                         null 
                     }
 
-                    {this.props.exercises
+                    {this.props.exercises ? this.props.exercises
                         .map(exercise =>
                             <Card  key={exercise.id}>
                                 <CardItem button onPress={() => this.goToSets(exercise.id)} style={{justifyContent: 'space-between'}}>
@@ -119,8 +122,8 @@ class WorkoutScreen extends Component {
                                 </CardItem>
                             </Card>
                         )
-                    }
-                    <Button block danger onPress={this.endWorkout}>
+                    : null}
+                    <Button rounded danger style={styles.centeredButton} onPress={() => this.endWorkout()}>
                         <Text>END WORKOUT</Text>
                     </Button>
                 </Content>
